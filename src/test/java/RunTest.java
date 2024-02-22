@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
  public class RunTest {
 
     @Test
-    public void addingNumbers(){
+    public void addingNumbersNumbers(){
         Main Cal = new Main();
         assertEquals( 7, Cal.addition(5,2));
     }
