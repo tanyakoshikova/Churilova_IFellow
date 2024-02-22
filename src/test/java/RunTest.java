@@ -1,4 +1,4 @@
-import org.example.Main;
+import  org.example.MathematicalOperations;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,20 +8,20 @@ public class RunTest {
 
     @Test
     public void addingNumbers() {
-        Main Cal = new Main();
+        MathematicalOperations Cal = new MathematicalOperations();
         Assertions.assertEquals(7, Cal.addition(5, 2));
     }
 
     @Test
     public void multiplyNumbers(){
-        Main Call = new Main();
+        MathematicalOperations Call = new MathematicalOperations();
         Assertions.assertEquals(6, Call.multiply(3,2));
     }
 
-    Main calculator;
+    MathematicalOperations calculator;
     @BeforeEach
     void setUp() {
-        calculator = new Main();
+        calculator = new MathematicalOperations();
     }
 
     @Test
@@ -32,7 +32,7 @@ public class RunTest {
 
     @Test
     public void compare() {
-        Main basicTests = new Main();
+        MathematicalOperations basicTests = new MathematicalOperations();
         int value = basicTests.compare(2, 1);
         Assertions.assertEquals(1, value);
     }
