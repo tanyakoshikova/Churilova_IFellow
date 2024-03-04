@@ -48,10 +48,4 @@ public class WebHooks {
         OutputData outputNewData = new OutputData(chromeDriver);
         outputNewData.outputNewData("");
     }
-
-//    @AfterSuite(alwaysRun = true)
-//    public void tearDown() {
-//        WebDriver driver = new ChromeDriver();
-//        driver.quit();
-//    }
 }
