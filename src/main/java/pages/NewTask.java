@@ -14,6 +14,7 @@ public class NewTask {
     private final SelenideElement atWork = $x("//span[text()='В работе']");
     private final SelenideElement process = $x("//a[@id='opsbar-transitions_more']");
     private final SelenideElement done = $x("//span[text()='Выполнено']/parent::a[@role='menuitem']");
+    private final SelenideElement statusTask = $x("//span[contains(@class, 'jira-issue-status') and text()='Готово']");
 
     public void taskDescription(String summary, String description) {
         summaryField.shouldBe(Condition.visible).sendKeys(summary);
@@ -27,5 +28,9 @@ public class NewTask {
         atWork.shouldBe(Condition.visible).click();
         process.shouldBe(Condition.visible).click();
         done.shouldBe(Condition.visible).click();
+    }
+
+    public String statusTask() {
+        return statusTask.getText();
     }
 }

@@ -1,20 +1,20 @@
-package config;
+package TestJira.steps;
 
 import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class WebHooks {
 
-    @BeforeEach
+    @Before
     public void initBrowser() {
         Selenide.open("https://edujira.ifellow.ru");
         getWebDriver().manage().window().maximize();
     }
 
-    @AfterEach
+    @After
     public void closeBrowser() {
         Selenide.closeWebDriver();
     }
