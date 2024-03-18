@@ -1,17 +1,20 @@
-package pages;
+package Steps;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static io.restassured.RestAssured.given;
 
-public class RickAndMortySteps {
-    public static String idMorty, genderMorty, speciesMorty, locationMorty, nameCharacter, speciesCharacter, locationCharacter;
-    public static int lastEpisode, idLastCharacter;
 
+public class RickAndMortySteps {
+    public static String idMorty, genderMorty, speciesMorty, locationMorty, speciesCharacter, locationCharacter;
+    public static int lastEpisode, idLastCharacter;
+    private static final Logger logger = LoggerFactory.getLogger(RickAndMortySteps.class);
     static RequestSpecification RickAndMortyApi = new RequestSpecBuilder()
             .setBaseUri("https://rickandmortyapi.com/api")
             .build();
@@ -30,7 +33,7 @@ public class RickAndMortySteps {
         genderMorty = characterJson.get("gender").toString();
         speciesMorty = characterJson.get("species").toString();
         locationMorty = characterJson.getJSONObject("location").get("name").toString();
-        System.out.println("Информация по персонажу Морти Смит, id персонажа: " + idMorty + ",пол персонажа: " + genderMorty);
+        logger.info("Информация по персонажу Морти Смит, id персонажа: {}, пол персонажа: {}", idMorty, genderMorty);
     }
 
     public static void getLastEpisode() {
@@ -45,7 +48,7 @@ public class RickAndMortySteps {
         int episode = (new JSONObject(gettingLastEpisode.getBody().asString()).getJSONArray("episode").length() - 1);
         lastEpisode = Integer.parseInt(new JSONObject(gettingLastEpisode.getBody().asString())
                 .getJSONArray("episode").get(episode).toString().replaceAll("[^0-9]", ""));
-        System.out.println("Последний эпизод, где появлялся Морти: " + lastEpisode);
+        logger.info("Последний эпизод, где появлялся Морти: {}", lastEpisode);
     }
 
     public static void getCharacter() {
@@ -60,7 +63,7 @@ public class RickAndMortySteps {
         int person = (new JSONObject(gettingCharacter.getBody().asString()).getJSONArray("characters").length() - 1);
         idLastCharacter = Integer.parseInt(new JSONObject(gettingCharacter.getBody().asString())
                 .getJSONArray("characters").get(person).toString().replaceAll("[^0-9]", ""));
-        System.out.println("Из списка последнего эпизода id последнего персонажа: " + idLastCharacter);
+        logger.info("Из списка последнего эпизода id последнего персонажа: {}", idLastCharacter);
     }
 
     public static void getDataCharacter() {
@@ -73,15 +76,14 @@ public class RickAndMortySteps {
                 .extract()
                 .response();
         JSONObject personJson = new JSONObject(gettingDataCharacter.getBody().asString());
-        nameCharacter = personJson.getString("name");
         speciesCharacter = personJson.getString("species");
         locationCharacter = personJson.getJSONObject("location").getString("name");
-        System.out.println("Данные по местонахождению и расе персонажа: " + locationCharacter + ", " + speciesCharacter);
-        System.out.println("Данные по местонахождению и расе Морти: " + locationMorty + ", " + speciesMorty);
+        logger.info("Данные по местонахождению и расе персонажа: {}, {}", locationCharacter, speciesCharacter);
+        logger.info("Данные по местонахождению и расе Морти: {}, {}", locationMorty, speciesMorty);
     }
 
     public static void checkData() {
         Assert.assertEquals("Расы отличаются => ", speciesCharacter, speciesMorty);
-        Assert.assertEquals("Места нахождения отличаются => ", locationCharacter, locationMorty);
+        Assert.assertNotEquals("Места нахождения не отличаются => ", locationCharacter, locationMorty);
     }
 }

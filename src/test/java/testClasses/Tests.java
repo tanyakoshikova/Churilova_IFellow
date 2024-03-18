@@ -7,8 +7,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.IOException;
 
-import static pages.CreateUserSteps.createUser;
-import static pages.RickAndMortySteps.*;
+import static Steps.CreateUserSteps.createUser;
+import static Steps.RickAndMortySteps.*;
 
 public class Tests extends WebHooks {
 
