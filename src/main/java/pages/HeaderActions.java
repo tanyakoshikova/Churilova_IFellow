@@ -15,7 +15,7 @@ public class HeaderActions {
     private final SelenideElement reportedByMe = $x("//a[@id='filter_lnk_reported_lnk']").as("Переход в задачи Сообщенные мной");
     private final SelenideElement searchTask = $x("//input[@id='quickSearchInput']").as("Строка поиска");
 
-    @Step("Переход в проект test")
+    @Step("Переход в проект \"test\"")
     public void selectProject() {
         goToProject.shouldBe(Condition.visible).click();
         goToProjectTest.shouldBe(Condition.visible).click();
