@@ -4,10 +4,15 @@ import config.WebHooks;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.*;
+import pages.HeaderActions;
+import pages.LoginPage;
+import pages.NewTask;
+import pages.TaskTestSelenium;
 
 import java.util.List;
+import java.util.Properties;
 
+@DisplayName("JiraTest")
 public class JiraTest extends WebHooks {
     public static final LoginPage loginPage = new LoginPage();
     public static final HeaderActions headerActions = new HeaderActions();
@@ -15,8 +20,9 @@ public class JiraTest extends WebHooks {
     public static final NewTask newTask = new NewTask();
     public static final String LOGIN = "AT14";
     public static final String PASSWORD = "Qwerty123";
-    public static final String SUMMARY = "Некорректное отображение имени пользователя в профиле.";
-    public static final String DESCRIPTION = "1.Зайти в аккаунт пользователя; 2.Перейти на страницу профиля; 3.Отметить, что вместо имени отображаются случайные символы.";
+    Properties config = new Properties();
+    String SUMMARY = config.getProperty("SUMMARY");
+    String DESCRIPTION = config.getProperty("DESCRIPTION");
 
     @Test
     @DisplayName("Авторизация")
